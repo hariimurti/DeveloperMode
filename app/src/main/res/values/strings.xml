@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Developer Mode</string>
+    <string name="btn_stop">Stop Service</string>
+    <string name="label1_main">The screen will remain on (alive)</string>
+    <string name="label1_sub">if phone connected to the computer</string>
+    <string name="label2_main">Maximum charging level >90%</string>
+    <string name="label2_sub">if phone connected to the computer</string>
+    <string name="label_stop_usb">Stop charging completely</string>
+    <string name="label_custom_level">Stop charging at level %d</string>
+    <string name="label_set_level">Set Level :</string>
+    <string name="toast_already">Service is already active</string>
+    <string name="toast_service">Developer mode activated!</string>
+    <string name="toast_stop">Return back to normal mode</string>
+    <string name="toast_notstop">No service is running!</string>
+    <string name="toast_notsupported">This device is not supported!</string>
+    <string name="label_author">Author</string>
+    <string name="label_website">Website</string>
+    <string name="label_titikdua">:</string>
+    <string name="my_name">Harimurti</string>
+    <string name="website">http://harimurti.net</string>
+</resources>
