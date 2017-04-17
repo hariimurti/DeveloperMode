@@ -29,8 +29,47 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         boolean isRooted = RootShell.isAccessGiven();
-
         final ConfigManager config = new ConfigManager(this);
+
+        final TextView label_usb = (TextView) findViewById(R.id.label_usb);
+        if (!config.getBoolean(FULL_STOP))
+            label_usb.setText(customLabel(config.getInteger(LEVEL)));
+        else
+            label_usb.setText(getString(R.string.label_stop_usb));
+
+        final SeekBar seekBar = (SeekBar) findViewById(R.id.seekBar);
+        seekBar.setMax(90 - 10);
+        seekBar.setProgress(config.getInteger(LEVEL) - 10);
+        seekBar.setEnabled(!config.getBoolean(FULL_STOP) && config.getBoolean(KEEP_SCREEN_ON));
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                progress = 10 + progress;
+                label_usb.setText(customLabel(progress));
+                config.setInteger(LEVEL, progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
+
+        final Switch switch3 = (Switch) findViewById(R.id.switch3);
+        switch3.setEnabled(config.getBoolean(CHARGING_SERVICE));
+        switch3.setChecked(!config.getBoolean(FULL_STOP));
+        switch3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                config.setBoolean(FULL_STOP, !isChecked);
+                seekBar.setEnabled(isChecked);
+                if (!isChecked)
+                    label_usb.setText(getString(R.string.label_stop_usb));
+                else
+                    label_usb.setText(customLabel(config.getInteger(LEVEL)));
+            }
+        });
 
         Switch switch1 = (Switch) findViewById(R.id.switch1);
         switch1.setChecked(config.getBoolean(KEEP_SCREEN_ON));
@@ -47,45 +86,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 config.setBoolean(CHARGING_SERVICE, isChecked);
-            }
-        });
-
-        final TextView label_usb = (TextView) findViewById(R.id.label_usb);
-        if (!config.getBoolean(FULL_STOP))
-            label_usb.setText(customLabel(config.getInteger(LEVEL)));
-        else
-            label_usb.setText(getString(R.string.label_stop_usb));
-
-        final SeekBar seekBar = (SeekBar) findViewById(R.id.seekBar);
-        seekBar.setMax(90 - 10);
-        seekBar.setProgress(config.getInteger(LEVEL) - 10);
-        seekBar.setEnabled(!config.getBoolean(FULL_STOP));
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                progress = 10 + progress;
-                label_usb.setText(customLabel(progress));
-                config.setInteger(LEVEL, progress);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {}
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {}
-        });
-
-        Switch switch3 = (Switch) findViewById(R.id.switch3);
-        switch3.setChecked(!config.getBoolean(FULL_STOP));
-        switch3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                config.setBoolean(FULL_STOP, !isChecked);
-                seekBar.setEnabled(isChecked);
-                if (!isChecked)
-                    label_usb.setText(getString(R.string.label_stop_usb));
-                else
-                    label_usb.setText(customLabel(config.getInteger(LEVEL)));
+                switch3.setEnabled(isChecked);
+                seekBar.setEnabled(!config.getBoolean(FULL_STOP) && isChecked);
             }
         });
 
