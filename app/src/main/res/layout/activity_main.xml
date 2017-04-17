@@ -157,7 +157,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
-            android:layout_margin="@dimen/margin_left_right"
+            android:layout_margin="@dimen/fab_margin"
             android:clickable="true"
             app:srcCompat="@android:drawable/ic_menu_view" />
 
@@ -167,9 +167,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:layout_margin="@dimen/margin_left_right"
+            android:layout_margin="@dimen/fab_margin"
             android:clickable="true"
-            app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+            app:srcCompat="@android:drawable/ic_menu_close_clear_cancel"
+            tools:ignore="RelativeOverlap" />
 
         <LinearLayout
             android:id="@+id/author"
@@ -191,7 +192,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerInParent="true"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    tools:ignore="UselessParent">
 
                     <TextView
                         android:layout_width="wrap_content"

@@ -6,4 +6,5 @@
     <dimen name="margin_seekbar">10dp</dimen>
     <dimen name="label_width">80dp</dimen>
     <dimen name="label_space">10dp</dimen>
+    <dimen name="fab_margin">30dp</dimen>
 </resources>
