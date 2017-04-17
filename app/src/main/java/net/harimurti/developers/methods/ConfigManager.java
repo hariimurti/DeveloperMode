@@ -10,6 +10,9 @@ public class ConfigManager {
 
     public ConfigManager(Context context) {
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        if (getInteger("LEVEL") == 0) {
+            setInteger("LEVEL", 90);
+        }
     }
 
     public boolean getBoolean(String key) {
