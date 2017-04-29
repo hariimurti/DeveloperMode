@@ -7,19 +7,13 @@ import android.content.Intent;
 import net.harimurti.developers.methods.BatteryStatus;
 import net.harimurti.developers.services.PreService;
 
-public class PowerReceiver extends BroadcastReceiver {
+public class BootReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        String action = intent.getAction();
         BatteryStatus bs = new BatteryStatus(context);
-
-        if (action.equals(Intent.ACTION_POWER_CONNECTED)) {
-            if (bs.getPlugged().contains("USB")) {
-                PreService.Start(context);
-            }
-        } else if (action.equals(Intent.ACTION_POWER_DISCONNECTED)) {
-            PreService.Stop(context);
+        if (bs.getPlugged().contains("USB")) {
+            PreService.Start(context);
         }
     }
 }
