@@ -18,6 +18,7 @@
     <string name="label_titikdua">:</string>
     <string name="my_name">Harimurti</string>
     <string name="website">http://harimurti.net</string>
+    <string name="copyright">Copyright &#169; 2017 by Harimurti.net</string>
     <string name="fab_start">Start Service</string>
     <string name="fab_stop">Stop Service</string>
 </resources>
