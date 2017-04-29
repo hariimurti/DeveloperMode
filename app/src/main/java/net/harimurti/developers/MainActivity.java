@@ -2,7 +2,6 @@ package net.harimurti.developers;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +11,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.clans.fab.FloatingActionMenu;
+import com.github.clans.fab.FloatingActionButton;
 import com.stericson.RootShell.RootShell;
 
 import net.harimurti.developers.methods.ConfigManager;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final String KEEP_SCREEN_ON = "KEEP_SCREEN_ON";
     private static final String LEVEL = "LEVEL";
     private static final String FULL_STOP = "FULL_STOP";
+    private static FloatingActionMenu fabMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,23 +93,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        fabMenu = (FloatingActionMenu) findViewById(R.id.fabMenu);
+        fabMenu.setEnabled(isRooted);
+
         FloatingActionButton fabStart = (FloatingActionButton) findViewById(R.id.fabStart);
         fabStart.setOnClickListener(this);
-        fabStart.setEnabled(isRooted);
 
         FloatingActionButton fabStop = (FloatingActionButton) findViewById(R.id.fabStop);
         fabStop.setOnClickListener(this);
-        fabStop.setEnabled(isRooted);
     }
 
     public void onClick(View view) {
         if (view.getId() == R.id.fabStart) {
             PreService.Start(this);
+            fabMenu.close(true);
         }
         if (view.getId() == R.id.fabStop) {
             if (!PreService.Stop(this)) {
                 Toast.makeText(this, R.string.toast_notstop, Toast.LENGTH_SHORT).show();
             }
+            fabMenu.close(true);
         }
         if (view.getId() == R.id.author) {
             Intent openWebsite = new Intent(Intent.ACTION_VIEW);
