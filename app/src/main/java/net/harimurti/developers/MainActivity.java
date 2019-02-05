@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         if (view.getId() == R.id.author) {
             Intent openWebsite = new Intent(Intent.ACTION_VIEW);
-            openWebsite.setData(Uri.parse("http://harimurti.net"));
+            openWebsite.setData(Uri.parse("http://github.com/hariimurti"));
             startActivity(openWebsite);
         }
     }
