@@ -1,12 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 26
     defaultConfig {
         applicationId "net.harimurti.developers"
         minSdkVersion 19
-        targetSdkVersion 25
+        //targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -15,34 +14,34 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildTypes {
-                release {
-                    minifyEnabled false
-                    proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-                    applicationVariants.all { variant ->
-                        variant.outputs.each { output ->
-                            def formattedDate = new Date().format('ddMMyyHH')
-                            def newName = output.outputFile.name
-                            newName = newName.replace("app-", defaultConfig.applicationId + "-")
-                            newName = newName.replace("-release", "_v" + defaultConfig.versionName + "_b" + formattedDate)
-                            output.outputFile = new File(output.outputFile.parent, newName)
-                        }
-                    }
-                }
-            }
+//            buildTypes {
+//                release {
+//                    minifyEnabled false
+//                    proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//                    applicationVariants.all { variant ->
+//                        variant.outputs.each { output ->
+//                            def formattedDate = new Date().format('ddMMyyHH')
+//                            def newName = output.outputFile.name
+//                            newName = newName.replace("app-", defaultConfig.applicationId + "-")
+//                            newName = newName.replace("-release", "_v" + defaultConfig.versionName + "_b" + formattedDate)
+//                            output.outputFileName = new File(output.outputFile.parent, newName)
+//                        }
+//                    }
+//                }
+//            }
         }
     }
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.1'
-    testCompile 'junit:junit:4.12'
-    compile files('libs/RootShell_v1.3.jar')
-    compile 'com.android.support:design:25.3.1'
-    compile 'com.github.clans:fab:1.6.4'
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    implementation files('libs/RootShell_v1.3.jar')
+    implementation 'com.android.support:design:26.1.0'
+    implementation 'com.github.clans:fab:1.6.4'
 }
