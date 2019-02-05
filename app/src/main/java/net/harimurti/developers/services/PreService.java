@@ -9,13 +9,12 @@ import net.harimurti.developers.methods.ConfigManager;
 import net.harimurti.developers.R;
 
 public class PreService {
-    private static final String CHARGING_SERVICE = "CHARGING_SERVICE";
     private static final String KEEP_SCREEN_ON = "KEEP_SCREEN_ON";
     private static final Class SERVICES = BackgroundService.class;
 
     public static void Start(Context context) {
         ConfigManager cm = new ConfigManager(context);
-        if (cm.getBoolean(KEEP_SCREEN_ON) || cm.getBoolean(CHARGING_SERVICE)) {
+        if (cm.getBoolean(KEEP_SCREEN_ON)) {
             if (!isServiceRunning(context, SERVICES)) {
                 Intent background = new Intent(context, SERVICES);
                 context.startService(background);
